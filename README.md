@@ -18,7 +18,7 @@ Optionally you can download ZIP file or clone using Visual Studio
 
 ### 2. Build the Project
 
-Open the folder containing .csproj file 
+Open the folder containing .csproj file
 Run the following command to build the project:
 
 ```
