@@ -12,7 +12,6 @@
 
 ```
 git clone https://github.com/RickSteadX/EloBot
-cd yourproject
 ```
 
 Optionally you can download ZIP file or clone using Visual Studio
@@ -22,8 +21,10 @@ Optionally you can download ZIP file or clone using Visual Studio
 Run the following command to build the project:
 
 ```
-dotnet build
+dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
 ```
+Note: this build command only supports Windows 64-bit
+The executable will be located on `{Project}\bin\Release\net8.0\win-x64\publish`
 
 ### 3. Update the Database Using EF Core
 
@@ -43,6 +44,7 @@ dotnet ef database update
 ```
 
 Make sure to configure your connection string in the `appsettings.json` file as needed before running the migration commands.
+Default string is `Data Source=elobot.db`
 
 ## Usage
 

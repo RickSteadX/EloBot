@@ -25,6 +25,10 @@
 	  </Content>
 	</ItemGroup>
 
+	<PropertyGroup>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Discord.Net" Version="3.15.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
