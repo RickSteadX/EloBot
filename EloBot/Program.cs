@@ -22,15 +22,18 @@ class Program
 
     public async Task MainAsync()
     {
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
         // Build configuration
         _configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
             .Build();
 
         // Configure Serilog
         Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(_configuration) // Reads from appsettings.json
+            .ReadFrom.Configuration(_configuration) // Reads from appsettings.json / appsettings.Development.json
             .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day) // Configures file logging
             .WriteTo.Console()
             .Enrich.FromLogContext()
@@ -62,8 +65,8 @@ class Program
     private async Task ReadyAsync()
     {
         Log.Information($"Logged in as {_client.CurrentUser.Username}#{_client.CurrentUser.Discriminator}");
-        await _interactions.RegisterCommandsToGuildAsync(1280256298851635222);
-        //await _interactions.RegisterCommandsGloballyAsync();
+        ulong guildID = ulong.Parse(_configuration["ServerID"]);
+        await _interactions.RegisterCommandsToGuildAsync(guildID);
     }
 
     private async Task HandleInteraction(SocketInteraction interaction)
@@ -109,7 +112,7 @@ class Program
             .AddDbContext<EloBotContext>(options =>
                 options
                 .UseSqlite(_configuration.GetConnectionString("DefaultConnection"))
-                //.LogTo(Console.WriteLine, LogLevel.Information)
+                //.LogTo(Console.WriteLine, LogLevel.Information) // If you want to log every SQL query
                 )
             .AddLogging(builder =>
             {
