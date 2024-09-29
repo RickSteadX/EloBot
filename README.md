@@ -18,13 +18,13 @@ Optionally you can download ZIP file or clone using Visual Studio
 
 ### 2. Build the Project
 
-Open the folder containing .csproj file 
+Open the folder containing .csproj file
 Run the following command to build the project:
 
 ```
 dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
 ```
-Note: this build command only supports Windows 64-bit
+Note: this build command only supports Windows 64-bit \n
 The executable will be located on `{Project}\bin\Release\net8.0\win-x64\publish`
 
 ### 3. Update the Database Using EF Core
