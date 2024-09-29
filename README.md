@@ -24,7 +24,8 @@ Run the following command to build the project:
 ```
 dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
 ```
-Note: this build command only supports Windows 64-bit \n
+Note: this build command only supports Windows 64-bit
+
 The executable will be located on `{Project}\bin\Release\net8.0\win-x64\publish`
 
 ### 3. Update the Database Using EF Core
